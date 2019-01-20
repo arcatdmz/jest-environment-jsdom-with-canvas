@@ -3,27 +3,19 @@
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- * @flow
  */
-
-import type {Script} from 'vm';
-import type {ProjectConfig} from 'types/Config';
-import type {EnvironmentOptions} from 'types/Environment';
-import type {Global} from 'types/Global';
-import type {ModuleMocker} from 'jest-mock';
-
 import {FakeTimers, installCommonGlobals} from 'jest-util';
 import mock from 'jest-mock';
 import {JSDOM, VirtualConsole} from 'jsdom';
 
 class JSDOMEnvironment {
-  dom: ?Object;
-  fakeTimers: ?FakeTimers<number>;
-  global: ?Global;
-  errorEventListener: ?Function;
-  moduleMocker: ?ModuleMocker;
+  dom;
+  fakeTimers;
+  global;
+  errorEventListener;
+  moduleMocker;
 
-  constructor(config: ProjectConfig, options?: EnvironmentOptions = {}) {
+  constructor(config, options = {}) {
     this.dom = new JSDOM(
       '<!DOCTYPE html>',
       Object.assign(
@@ -73,8 +65,8 @@ class JSDOMEnvironment {
     this.moduleMocker = new mock.ModuleMocker(global);
 
     const timerConfig = {
-      idToRef: (id: number) => id,
-      refToId: (ref: number) => ref,
+      idToRef: (id) => id,
+      refToId: (ref) => ref,
     };
 
     this.fakeTimers = new FakeTimers({
@@ -85,11 +77,11 @@ class JSDOMEnvironment {
     });
   }
 
-  setup(): Promise<void> {
+  setup() {
     return Promise.resolve();
   }
 
-  teardown(): Promise<void> {
+  teardown() {
     if (this.fakeTimers) {
       this.fakeTimers.dispose();
     }
@@ -108,7 +100,7 @@ class JSDOMEnvironment {
     return Promise.resolve();
   }
 
-  runScript(script: Script): ?any {
+  runScript(script) {
     if (this.dom) {
       return this.dom.runVMScript(script);
     }
