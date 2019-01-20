@@ -1,9 +1,9 @@
 {
-  "name": "jest-environment-jsdom",
-  "version": "23.4.0",
+  "name": "jest-environment-jsdom-with-canvas",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git"
+    "url": "https://github.com/arcatdmz/jest-environment-jsdom-with-canvas.git"
   },
   "license": "MIT",
   "main": "src/index.js",
