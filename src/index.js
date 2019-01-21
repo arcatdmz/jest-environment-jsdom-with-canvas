@@ -4,11 +4,9 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import utils from 'jest-util';
+import {FakeTimers, installCommonGlobals} from 'jest-util';
 import mock from 'jest-mock';
-import jsdom from 'jsdom';
-const {FakeTimers, installCommonGlobals} = utils;
-const {JSDOM, VirtualConsole} = jsdom;
+import {JSDOM, VirtualConsole} from 'jsdom';
 
 class JSDOMEnvironment {
   dom;
